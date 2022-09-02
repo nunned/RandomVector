@@ -8,7 +8,7 @@ class RandomVector{
   std::vector<double> vect;
   
   public:
-    RandomVector(int size, double max_val = 1) {
+    RandomVector(unsigned int size, double max_val = 1) {
   // TODO: Write your code here
   vect = vector<double>(size);
   for (int i = 0; i < size; ++i) {
@@ -18,7 +18,7 @@ class RandomVector{
 
 void print(){
   // TODO: Write your code here
-  for (int i = 0; i < vect.size(); ++i) {
+  for (unsigned int i = 0; i < vect.size(); ++i) {
     std::cout << vect[i] << "  ";
   }
   std::cout << endl;
@@ -35,9 +35,9 @@ double mean(){
 double max(){
   // TODO: Write your code here
   double max_element = vect[0];
-  for (int k = 1; k < vect.size(); k++){
-  	if (vect[k] > max_element) {
-  		max_element = vect[k];
+  for (unsigned int i = 1; i < vect.size(); ++i){
+  	if (vect[i] > max_element) {
+  		max_element = vect[i];
   	}
   }
   return max_element;
@@ -46,9 +46,9 @@ double max(){
 double min(){
   //TODO:  Write your code here
   double min_element = vect[0];
-  for (int k = 1; k < vect.size(); k++){
-  	if (vect[k] < min_element) {
-  		min_element = vect[k];
+  for (unsigned int i = 1; i < vect.size(); ++i){
+  	if (vect[i] < min_element) {
+  		min_element = vect[i];
   	}
   }
   return min_element;
@@ -60,21 +60,21 @@ void printHistogram(int bins){
   double range = max() - min;
   double bin_size = range / bins;
   vector<int> bins_counter = std::vector<int>(bins, 0);
-  for (int i = 0; i < vect.size(); ++i) {
+  for (unsigned int i = 0; i < vect.size(); ++i) {
     double data = vect[i];
     int index = (data - min) / bin_size;
     bins_counter[index]++;
   }
   int max_count = -1;
   int max_idx = -1;
-  for (int i = 0; i < bins; ++i) {
+  for (unsigned int i = 0; i < bins; ++i) {
     if (bins_counter[i] >= max_count) {
       max_count = bins_counter[i];
       max_idx = i;
     }
   }
-  for (int i = max_count; i > 0; --i) {
-    for (int j = 0; j < max_idx; ++j) {
+  for (unsigned int i = max_count; i > 0; --i) {
+    for (unsigned int j = 0; j < max_idx; ++j) {
       if (bins_counter[j] >= i) {
         cout << "*** ";
       } else {
@@ -82,11 +82,11 @@ void printHistogram(int bins){
       }
     }
     cout << "***";
-    for (int j = max_idx + 1; j <= bins; ++j) {
+    for (unsigned int j = max_idx + 1; j < bins; ++j) {
       int temp_count = 0;
       if (bins_counter[j] < i) temp_count++;
       else {
-        for (int k = 0; k < temp_count; ++k) {
+        for (unsigned int k = 0; k < temp_count; ++k) {
           cout << "    ";
         }
         cout << " ***";
